@@ -12,7 +12,13 @@ class Atom(object):
 		self.elem = elem
 		self.name = name
 		if bonds == None:
-			self.bonds = []
+			#determines how many electron pairs an atom gets, based on which element it is
+			if elem == 'C':
+				self.bonds = []
+			elif elem == 'N' or elem == 'P':
+				self.bonds = ['e']
+			elif elem == 'O' or elem == 'S':
+				self.bonds = ['e', 'e']
 		else:
 			self.bonds = bonds
 
@@ -22,9 +28,13 @@ def print_atom(atom):
 	print atom.bonds
 
 def main():
-	#Simple test case
-	atom = Atom('N', 'N1', ['C1', 'C2'])
-	print_atom(atom)
+	#If no bonds are given...
+	atom1 = Atom('N', 'N1')
+	print_atom(atom1)
+
+	#If bonds are specified...
+	atom2 = Atom('N', 'N2', ['C1', 'C2'])
+	print_atom(atom2)
 
 if __name__ == '__main__':
 	main()
