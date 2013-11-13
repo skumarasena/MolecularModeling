@@ -16,7 +16,7 @@ def remove_h(formula):
 	return res
 
 def make_list(formula):
-	"""Takes stripped formula (i.e. a structural formula which has gone through remove_h()) and converts it to a nested list.
+	"""Takes a stripped formula (i.e. a structural formula which has gone through remove_h()) and converts it to a nested list.
 
 	TODO: handle formulas with parenthetical multiplicity, ex. C(CH3)3
 
