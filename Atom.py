@@ -22,7 +22,7 @@ class Atom(object):
 			self.bonds = bonds
 
 	def __str__(self):
-		return self.elem + ': ' + self.name + ' ' + str(self.bonds)
+		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
 
 
 def main():
