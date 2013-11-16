@@ -1,6 +1,9 @@
 from string import *
 import ast
 
+#global bonds = {}
+
+
 def remove_h(formula):
 	"""Takes standard structural chemical formula, and removes all hydrogens from the formula.
 
@@ -16,7 +19,7 @@ def remove_h(formula):
 	return res
 
 def make_list(formula):
-	"""Takes a stripped formula (i.e. a structural formula which has gone through remove_h()) and converts it to a nested list.
+	"""Takes stripped formula (i.e. a structural formula which has gone through remove_h()) and converts it to a nested list.
 
 	TODO: handle formulas with parenthetical multiplicity, ex. C(CH3)3
 
@@ -33,9 +36,47 @@ def make_list(formula):
 	#Splits the string into elements by spaces, replaces parentheses with brackets, then evaluates the resulting expression as a Python expression. The result is a list. 
 	return eval(str(t2.split()).replace("'(',", '[').replace("')'",']'))
 
+def number_list(t):
+	"""Takes a nested list that represents a chemical formula (returned by the function make_list()) and numbers the atoms in order.
+
+	TODO: make this function work :(
+		(Problem: apparently I'm using global variables incorrectly.)
+
+	t: list of str
+	Returns: list of str
+	"""
+	global i
+	res = []
+	for elem in t:
+		if type(elem)==str:
+			res.append(elem + str(i))
+		if type(elem)==list:
+			number_list(elem)
+		i += 1
+	return res
+
+
+
+def make_dict(t):
+	"""Takes a nested, numbered list that represents a chemical formula (returned by the function number_list()) and creates a dictionary that maps from a given atom to the atoms directly bonded to it. 
+
+	TODO: write this...
+
+	t: list of str
+	Returns: dict of str -> list
+	"""
+	return True
+
+
 
 
 def main():
+	#I attempted to test number_list()
+	#DOES NOT WORK!
+	# i = 0
+	# print number_list(['C', 'C', 'C'])
+
+
 	#the basics
 	s1 = 'CH3CH2CH3'
 	print 's1:',
@@ -68,6 +109,7 @@ def main():
 	print 's6:',
 	print remove_h(s6)
 	print make_list(remove_h(s6))
+
 
 if __name__ == '__main__':
 	main()
