@@ -42,9 +42,11 @@ def number_list(t):
 	TODO: make this function work :(
 		(Problem: apparently I'm using global variables incorrectly.)
 
+	Should we just start using objects here? It'll be much easier...
+
 	t: list of str
 	Returns: list of str
-	"""
+	"""	
 	global i
 	res = []
 	for elem in t:
