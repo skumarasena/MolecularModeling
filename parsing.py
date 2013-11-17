@@ -60,7 +60,8 @@ def number_list(t):
 def main():
 	#I attempted to test number_list()
 	i = 0
-	print number_list(['C', 'C', 'C'])
+	x = number_list(['C', 'C', 'C'])
+	print x[0]		#should print representation of an Atom object
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
