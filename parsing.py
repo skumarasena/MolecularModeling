@@ -40,15 +40,10 @@ def make_list(formula):
 	return eval(str(t2.split()).replace("'(',", '[').replace("')'",']'))
 
 def number_list(t):
-	"""Takes a nested list that represents a chemical formula (returned by the function make_list()) and numbers the atoms in order.
-
-	TODO: make this function work :(
-		(Problem: apparently I'm using global variables incorrectly.)
-
-	Should we just start using objects here? It'll be much easier...
+	"""Takes a nested list that represents a chemical formula (returned by the function make_list()), makes an analogous list of atoms, and numbers the atoms in order.
 
 	t: list of str
-	Returns: list of str
+	Returns: list of Atoms
 	"""	
 	global i
 	res = []
@@ -62,24 +57,11 @@ def number_list(t):
 	return res
 
 
-
-def make_dict(t):
-	"""Takes a nested, numbered list that represents a chemical formula (returned by the function number_list()) and creates a dictionary that maps from a given atom to the atoms directly bonded to it. 
-
-	TODO: write this...
-
-	t: list of str
-	Returns: dict of str -> list
-	"""
-	return True
-
-
-
-
 def main():
 	#I attempted to test number_list()
 	i = 0
-	print number_list(['C', 'C', 'C'])
+	x = number_list(['C', 'C', 'C'])
+	print x[0]		#should print representation of an Atom object
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
