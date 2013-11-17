@@ -40,15 +40,10 @@ def make_list(formula):
 	return eval(str(t2.split()).replace("'(',", '[').replace("')'",']'))
 
 def number_list(t):
-	"""Takes a nested list that represents a chemical formula (returned by the function make_list()) and numbers the atoms in order.
-
-	TODO: make this function work :(
-		(Problem: apparently I'm using global variables incorrectly.)
-
-	Should we just start using objects here? It'll be much easier...
+	"""Takes a nested list that represents a chemical formula (returned by the function make_list()), makes an analogous list of atoms, and numbers the atoms in order.
 
 	t: list of str
-	Returns: list of str
+	Returns: list of Atoms
 	"""	
 	global i
 	res = []
@@ -60,20 +55,6 @@ def number_list(t):
 		if type(elem)==list:
 			res.append(number_list(elem))
 	return res
-
-
-
-def make_dict(t):
-	"""Takes a nested, numbered list that represents a chemical formula (returned by the function number_list()) and creates a dictionary that maps from a given atom to the atoms directly bonded to it. 
-
-	TODO: write this...
-
-	t: list of str
-	Returns: dict of str -> list
-	"""
-	return True
-
-
 
 
 def main():
