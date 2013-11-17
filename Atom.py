@@ -25,7 +25,7 @@ class Atom(object):
 		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
 
 
-"""def main():
+def main():
 	#If no bonds are given...
 	atom1 = Atom('N', 'N1')
 	print atom1
@@ -34,5 +34,5 @@ class Atom(object):
 	atom2 = Atom('N', 'N2', ['C1', 'C2'])
 	print atom2
 
-#if __name__ == '__main__':
-	main()"""
+if __name__ == '__main__':
+	main()

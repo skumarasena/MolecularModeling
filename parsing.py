@@ -1,4 +1,5 @@
 from string import *
+from Atom import *
 import ast
 
 i = 0
@@ -53,10 +54,11 @@ def number_list(t):
 	res = []
 	for elem in t:
 		if type(elem)==str:
-			res.append(elem + str(i))
+			#res.append(elem + str(i))		#appends string
+			res.append(Atom(elem, elem + str(i)))	#appends atom
 			i +=1
 		if type(elem)==list:
-			number_list(elem)
+			res.append(number_list(elem))
 	return res
 
 
@@ -76,9 +78,12 @@ def make_dict(t):
 
 def main():
 	#I attempted to test number_list()
-	#DOES NOT WORK!
 	i = 0
 	print number_list(['C', 'C', 'C'])
+
+	#weirdly enough, even when I try to reset i, this will still start at C3!
+	i = 0
+	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'])
 
 
 	#the basics
