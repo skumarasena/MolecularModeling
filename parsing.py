@@ -1,6 +1,8 @@
 from string import *
 import ast
 
+i = 0
+
 #global bonds = {}
 
 
@@ -52,9 +54,9 @@ def number_list(t):
 	for elem in t:
 		if type(elem)==str:
 			res.append(elem + str(i))
+			i +=1
 		if type(elem)==list:
 			number_list(elem)
-		i += 1
 	return res
 
 
@@ -75,8 +77,8 @@ def make_dict(t):
 def main():
 	#I attempted to test number_list()
 	#DOES NOT WORK!
-	# i = 0
-	# print number_list(['C', 'C', 'C'])
+	i = 0
+	print number_list(['C', 'C', 'C'])
 
 
 	#the basics
