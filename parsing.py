@@ -16,7 +16,7 @@ def remove_h(formula):
 	#Just in case someone decides to enter non-capital letters...I've made that mistake before :P
 	s = formula.upper()
 
-	#Replaces all possible combinations of hydrogens with the empty string.Important: this function call replaces 'H' last!
+	#Replaces all possible combinations of hydrogens with the empty string. Important: this function call replaces 'H' last!
 	res = s.replace('H4','').replace('H3','').replace('H2','').replace('H','')
 
 	return res

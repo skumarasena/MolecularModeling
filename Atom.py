@@ -2,6 +2,7 @@
 
 class Atom(object):
 	"""Represents an atom with bonds and electron pairs."""
+	
 	def __init__(self, elem = '', name = '', bonds = None, size = 0, color = ''):
 		"""Initializes instance of the Atom class. 
 
