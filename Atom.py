@@ -22,6 +22,19 @@ class Atom(object):
 			self.bonds = bonds
 
 	def __str__(self):
+		"""Creates an informal string representation of an Atom object, with its name, element, and bonds, when the print function is called.
+
+		self: Atom
+		Returns: str
+		"""
+		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
+
+	def __repr__(self):
+		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
+
+		self: Atom
+		Returns: str
+		"""
 		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
 
 
@@ -33,6 +46,9 @@ def main():
 	#If bonds are specified...
 	atom2 = Atom('N', 'N2', ['C1', 'C2'])
 	print atom2
+
+	t = [atom1, atom2]
+	print t
 
 if __name__ == '__main__':
 	main()
