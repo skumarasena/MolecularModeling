@@ -1,6 +1,11 @@
 from Atom import *
 
 def set_bonds(t):
+    """Takes a nested list of empty Atom objects, and gives each atom a list of Atom objects to which it is directly bonded.
+
+    t: nested list of Atom objects
+    Returns: None
+    """
     
     for i in range(1,len(t)):
 
@@ -26,5 +31,26 @@ def set_bonds(t):
 
 
 
+def flatten(t):
+    """Takes a nested list of Atom objects (from the function set_bonds()) and flattens it, so that the collapsed list can be passed to our drawing functions.
+
+    t: nested list of Atom objects
+    Returns: flattened list of Atoms
+    """
+    res = []
+    for elem in t:
+        if isinstance(elem, list):
+            res.extend(flatten(elem))
+        else:
+            res.append(elem)
+    return res
 
 
+def main():
+    t = [1,2,3,[4,5],[],[6]]
+    print flatten(t)
+
+
+
+if __name__ == '__main__':
+    main()
