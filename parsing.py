@@ -56,16 +56,34 @@ def number_list(t):
 			res.append(number_list(elem))
 	return res
 
+# def number_list(t, i):
+# 	"""Takes a nested list that represents a chemical formula (returned by the function make_list()), makes an analogous list of atoms, and numbers the atoms in order.
+
+# 	t: list of str
+# 	Returns: list of Atoms
+# 	"""	
+# #	global i
+# 	res = []
+# 	for elem in t:
+# 		if type(elem)==str:
+# 			res.append(elem + str(i))		#appends string
+# 			#res.append(Atom(elem, elem + str(i)))	#appends atom
+# 			i +=1
+# 		if type(elem)==list:
+# 			res.append(number_list(elem, i))
+# 	return res
+
+
 
 def main():
 	#I attempted to test number_list()
 	i = 0
-	x = number_list(['C', 'C', 'C'])
+	x = number_list(['C', 'C', 'C'], 0)
 	print x[0]		#should print representation of an Atom object
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
-	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'])
+	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'], 0)
 
 
 	#the basics
