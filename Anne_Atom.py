@@ -31,9 +31,9 @@ class Hydrogen(Atom):
 class Nitrogen(Atom):
 	"""Creates an N atom class with properties used to graph"""
 		self.color = (0,1,0) #makes it green in blender
-		self.bonds = bonds
-	def __init__(self,bonds = ['e']):
 		self.radius = 3
+	def __init__(self,bonds = ['e']):
+		self.bonds = bonds
 
 class Carbon(Atom):
 	"""Creates a C atom class with properties used to graph"""
@@ -42,7 +42,7 @@ class Carbon(Atom):
 	def __init__(self,bonds = []):
 		self.bonds = bonds
 
-class Phosphorous(Atom):
+class Phosphorus(Atom):
 	"""Creates a P atom class with properties used to graph"""
 		self.radius = 4
 		self.color = (2,0,2) #makes it purple

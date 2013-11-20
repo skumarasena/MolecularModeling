@@ -1,5 +1,5 @@
-from string import *
-from Atom import *
+import string
+import Atom
 import ast
 
 i = 0
@@ -50,12 +50,13 @@ def number_list(t):
 	for elem in t:
 		if type(elem)==str:
 			#res.append(elem + str(i))		#appends string
-			res.append(Atom(elem, elem + str(i)))	#appends atom
+			res.append(Atom.Atom(elem, elem + str(i)))	#appends atom
 			i +=1
 		if type(elem)==list:
 			res.append(number_list(elem))
 	return res
 
+#DOES NOT WORK: attempted to write number_list without globals.
 # def number_list(t, i):
 # 	"""Takes a nested list that represents a chemical formula (returned by the function make_list()), makes an analogous list of atoms, and numbers the atoms in order.
 
