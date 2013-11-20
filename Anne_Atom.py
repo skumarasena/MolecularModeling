@@ -1,18 +1,15 @@
-
+import bpy
 
 class Atom(object):
 	"""Represents an atom with bonds and electron pairs."""
-	def __init__(self, elem = '', name = '', bonds = None, color):
+	def __init__(self, name = '', bonds = None, color = None, radius = 0):
 		"""Initializes instance of the Atom class. 
 
 		elem: string (element, ex. C, N, O)
 		name: string (name of atom, ex. C1, C2, N3)
-		bonds: list of strings/atoms... given our data structure, is this really necessary?
+		bonds: list of Atom objects
 		"""
-		self.elem = elem
 		self.name = name
-		self.bonds = bonds
-		self.color = color
 
 	def __str__(self):
 		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
@@ -25,7 +22,7 @@ class Hydrogen(Atom):
 	"""Creates an H atom class with properties used to graph"""
 		self.radius = 1
 		self.color = (1,0,0) #makes it red in blender
-	def __init__(self, bonds = []):
+	def __init__(self, Atom.bonds):
 		self.bonds = bonds
 
 class Nitrogen(Atom):
@@ -61,32 +58,32 @@ class Sulfur(Atom):
 	def __init__(self,bonds = ['e', 'e']):
 		self.bonds = bonds
 
-import bpy
+
  
-def makeMaterial(name, diffuse, specular, alpha):
-    mat = bpy.data.materials.new(name)
-    mat.diffuse_color = diffuse
-    mat.diffuse_shader = 'LAMBERT' 
-    mat.diffuse_intensity = 1.0 
-    mat.specular_color = specular
-    mat.specular_shader = 'COOKTORR'
-    mat.specular_intensity = 0.5
-    mat.alpha = alpha
-    mat.ambient = 1
-    return mat
+# def makeMaterial(name, diffuse, specular, alpha):
+#     mat = bpy.data.materials.new(name)
+#     mat.diffuse_color = diffuse
+#     mat.diffuse_shader = 'LAMBERT' S
+#     mat.diffuse_intensity = 1.0 
+#     mat.specular_color = specular
+#     mat.specular_shader = 'COOKTORR'
+#     mat.specular_intensity = 0.5
+#     mat.alpha = alpha
+#     mat.ambient = 1
+#     return mat
  
-def setMaterial(ob, mat):
-    me = ob.data
-    me.materials.append(mat)
+# def setMaterial(ob, mat):
+#     me = ob.data
+#     me.materials.append(mat)
  
-def make_atom(origin,atom):
-    atom_mat = makeMaterial(atom.name, atom.color, (0.5,0.5,0), 0.5)
-    bpy.ops.mesh.primitive_uv_sphere_add(location=origin,size=atom.radius)
-    bpy.ops.transform.translate(value=(0,0,0))
-    setMaterial(bpy.context.object, atom_mat)
+# def make_atom(origin,atom):
+#     atom_mat = makeMaterial(atom.name, atom.color, (0.5,0.5,0), 0.5)
+#     bpy.ops.mesh.primitive_uv_sphere_add(location=origin,size=atom.radius)
+#     bpy.ops.transform.translate(value=(0,0,0))
+#     setMaterial(bpy.context.object, atom_mat)
  
-if __name__ == "__main__":
-    run((0,0,0))
+# if __name__ == "__main__":
+#     run((0,0,0))
 
 
 def main():

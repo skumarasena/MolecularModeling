@@ -3,7 +3,7 @@
 class Atom(object):
 	"""Represents an atom with bonds and electron pairs."""
 	
-	def __init__(self, elem = '', name = '', bonds = None, size = 0, color = ''):
+	def __init__(self, elem = '', name = '', bonds = None, size = 0, color = None):
 		"""Initializes instance of the Atom class. 
 
 		elem: string (element, ex. C, N, O)
@@ -16,21 +16,40 @@ class Atom(object):
 		"""
 		self.elem = elem
 		self.name = name
-		if bonds == None:
-			if elem == 'C':
+
+		if elem == 'C':
+			self.size = 2
+			self.color = 'GRAY'
+			if bonds == None:
 				self.bonds = []
-				self.size = 0
-				self.color = ''
-			elif elem == 'N' or elem == 'P':
+			else:
+				self.bonds = bonds
+
+		elif elem == 'N' or elem == 'P':
+			if bonds == None:
 				self.bonds = ['e']
-				self.size = 0
-				self.color = ''
-			elif elem == 'O' or elem == 'S':
+			else:
+				self.bonds = bonds
+
+			if elem == 'N':	
+				self.size = 3
+				self.color = 'GREEN'
+			else:					#if it is a phosphorus atom
+				self.size = 4
+				self.color = 'PURPLE'
+
+		elif elem == 'O' or elem == 'S':
+			if bonds == None:
 				self.bonds = ['e', 'e']
-				self.size = 0
-				self.color = ''
-		else:
-			self.bonds = bonds
+			else:
+				self.bonds = bonds
+
+			if elem == 'O':
+				self.size = 2
+				self.color = 'GRAY'
+			else:					#if it is a sulfur atom
+				self.size = 2
+				self.color = 'GRAY'
 
 	def __str__(self):
 		"""Creates an informal string representation of an Atom object, with its name, element, and bonds, when the print function is called.
@@ -38,7 +57,9 @@ class Atom(object):
 		self: Atom
 		Returns: str
 		"""
+
 		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
+		#eturn '%s: %s, %s, %s' % (self.elem, self.name, str(self.bonds), self.color)
 
 	def __repr__(self):
 		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
