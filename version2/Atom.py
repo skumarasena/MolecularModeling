@@ -24,14 +24,16 @@ class Atom(object):
 		return '%s: %s' % (self.name, str(self.bonds))
 
 
-
 class Hydrogen(Atom):
 	"""Creates an H atom class with properties used to graph"""
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.radius = 1
@@ -44,11 +46,14 @@ class Hydrogen(Atom):
 
 class Nitrogen(Atom):
 	"""Creates an N atom class with properties used to graph"""
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.color = (0,1,0) #makes it green in blender
@@ -57,11 +62,14 @@ class Nitrogen(Atom):
 
 class Carbon(Atom):
 	"""Creates a C atom class with properties used to graph"""
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
@@ -70,11 +78,14 @@ class Carbon(Atom):
 
 class Phosphorus(Atom):
 	"""Creates a P atom class with properties used to graph"""
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.radius = 4
@@ -82,11 +93,14 @@ class Phosphorus(Atom):
 
 
 class Oxygen(Atom):
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
@@ -94,11 +108,14 @@ class Oxygen(Atom):
 
 
 class Sulfur(Atom):
-	def __init__(self,name,bonds):
-		atom = Atom(name,bonds)
+	def __init__(self,name,bonds=None):
+		try:
+			atom = Atom(name, bonds)
+		except SyntaxError:
+			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			bonds = []
+			self.bonds = []
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
@@ -133,10 +150,32 @@ class Sulfur(Atom):
 
 
 def main():
-	atom = Hydrogen('H1',['bond1'])
-	atom2 = Hydrogen('H2',['bond2'])
-	print atom
+	#initializing atoms with bonds, and without bonds
+	atom1 = Hydrogen('H1',['bond1'])
+	atom2 = Nitrogen('N2',['bond2'])
+	atom3 = Hydrogen('H3')
+
+	#list of atoms -- can it print properly?
+	#HINT: yes
+	t = [atom1, atom2, atom3]
+
+	#testing...
+	print atom1
 	print atom2
+	print atom3
+	print t
+
+	#can we append bonds to atom objects that already have a bond list?
+	atom2.bonds.append('bond2.5')
+	print atom2
+
+	#can we append bonds to atom objects that do not have a bond list yet?
+	atom3.bonds.append('bond3')
+	print atom3
+
+	#can we append atoms to bond lists?
+	atom1.bonds.append(atom2)
+	print atom1
 
 
 

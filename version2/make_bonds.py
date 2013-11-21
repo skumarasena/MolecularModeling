@@ -1,5 +1,5 @@
-import Anne_Atom
-import subclass_parsing
+import Atom
+import parsing
 #from Atom import *
 
 def set_bonds(t):
@@ -61,7 +61,7 @@ def main():
     print parsing.make_list(parsing.remove_h(s1))
     print parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
 
-    print set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
+    set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
 
 
 
