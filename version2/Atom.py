@@ -3,7 +3,7 @@
 
 class Atom(object):
 	"""Represents an atom with bonds and electron pairs."""
-	def __init__(self, name = '', bonds = None):
+	def __init__(self, name = '', bonds = None, pos = None):
 		"""Initializes instance of the Atom class. 
 
 		name: string (name of atom, ex. C1, C2, N3)
@@ -11,9 +11,13 @@ class Atom(object):
 		"""
 		self.name = name
 		self.bonds = bonds
+		if pos is None:
+			self.pos = [0,0,0]
+		else:
+			self.pos = pos
 
 	def __str__(self):
-		return '%s: %s' % (self.name, str(self.bonds))
+		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
 
 	def __repr__(self):
 		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
@@ -21,17 +25,18 @@ class Atom(object):
 		self: Atom
 		Returns: str
 		"""
-		return '%s: %s' % (self.name, str(self.bonds))
+		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
 
 
 class Hydrogen(Atom):
 	"""Creates an H atom class with properties used to graph"""
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos
 		if atom.bonds == None:
 			self.bonds = []
 		else:
@@ -46,12 +51,13 @@ class Hydrogen(Atom):
 
 class Nitrogen(Atom):
 	"""Creates an N atom class with properties used to graph"""
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos
 		if atom.bonds == None:
 			self.bonds = ['e']
 		else:
@@ -62,12 +68,13 @@ class Nitrogen(Atom):
 
 class Carbon(Atom):
 	"""Creates a C atom class with properties used to graph"""
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos		
 		if atom.bonds == None:
 			self.bonds = []
 		else:
@@ -78,12 +85,13 @@ class Carbon(Atom):
 
 class Phosphorus(Atom):
 	"""Creates a P atom class with properties used to graph"""
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos		
 		if atom.bonds == None:
 			self.bonds = ['e']
 		else:
@@ -93,12 +101,13 @@ class Phosphorus(Atom):
 
 
 class Oxygen(Atom):
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos		
 		if atom.bonds == None:
 			self.bonds = ['e', 'e']
 		else:
@@ -108,12 +117,13 @@ class Oxygen(Atom):
 
 
 class Sulfur(Atom):
-	def __init__(self,name,bonds=None):
+	def __init__(self,name,bonds=None, pos=None):
 		try:
-			atom = Atom(name, bonds)
+			atom = Atom(name, bonds, pos)
 		except SyntaxError:
 			atom = Atom(name)
 		self.name = atom.name
+		self.pos = atom.pos		
 		if atom.bonds == None:
 			self.bonds = ['e', 'e']
 		else:
@@ -151,9 +161,10 @@ class Sulfur(Atom):
 
 def main():
 	#initializing atoms with bonds, and without bonds
-	atom1 = Hydrogen('H1',['bond1'])
+	atom1 = Hydrogen('H1',['bond1'], [1,2,3])
 	atom2 = Nitrogen('N2',['bond2'])
 	atom3 = Hydrogen('H3')
+
 
 	#list of atoms -- can it print properly?
 	#HINT: yes
@@ -176,6 +187,14 @@ def main():
 	#can we append atoms to bond lists?
 	atom1.bonds.append(atom2)
 	print atom1
+
+	#can positions be modified?
+	atom1.pos = [2,3,4]
+	print atom1
+
+	#can position variables be created?
+	atom3.pos = [3,4,5]
+	print atom3
 
 
 
