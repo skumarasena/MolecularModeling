@@ -13,7 +13,7 @@ class Atom(object):
 		self.bonds = bonds
 
 	def __str__(self):
-		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.color))
+		return '%s: %s' % (self.name, str(self.bonds))
 
 	def __repr__(self):
 		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.

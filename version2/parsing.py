@@ -1,5 +1,5 @@
 import string
-import Anne_Atom
+import Atom
 import ast
 
 i = 0
@@ -50,8 +50,7 @@ def number_list(t):
 	for elem in t:
 		if type(elem)==str:
 			#res.append(elem + str(i))		#appends string
-			if elem = 'C':
-				res.append(Atom.Atom(elem + str(i)))	#appends atom
+			res.append(Atom.Atom(elem + str(i)))	#appends atom
 			i +=1
 		if type(elem)==list:
 			res.append(number_list(elem))
@@ -80,12 +79,12 @@ def number_list(t):
 def main():
 	#I attempted to test number_list()
 	i = 0
-	x = number_list(['C', 'C', 'C'], 0)
+	x = number_list(['C', 'C', 'C'])
 	print x[0]		#should print representation of an Atom object
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
-	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'], 0)
+	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'])
 
 
 	#the basics
