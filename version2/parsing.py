@@ -50,7 +50,16 @@ def number_list(t):
 	for elem in t:
 		if type(elem)==str:
 			#res.append(elem + str(i))		#appends string
-			res.append(Atom.Atom(elem + str(i)))	#appends atom
+			if elem == 'C':
+				res.append(Atom.Carbon(elem + str(i)))	#appends atom
+			if elem == 'N':
+				res.append(Atom.Nitrogen(elem + str(i)))	#appends atom
+			if elem == 'O':
+				res.append(Atom.Oxygen(elem + str(i)))	#appends atom
+			if elem == 'P':
+				res.append(Atom.Phosphorus(elem + str(i)))	#appends atom	
+			if elem == 'S':
+				res.append(Atom.Sulfur(elem + str(i)))	#appends atom	
 			i +=1
 		if type(elem)==list:
 			res.append(number_list(elem))
@@ -84,7 +93,7 @@ def main():
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
-	print number_list(['C', 'C', 'C', ['C', 'C', ['C']], 'C', 'C'])
+	print number_list(['C', 'N', 'O', ['C', 'P', ['C']], 'S', 'C'])
 
 
 	#the basics

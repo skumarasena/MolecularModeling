@@ -53,7 +53,7 @@ class Nitrogen(Atom):
 			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			self.bonds = []
+			self.bonds = ['e']
 		else:
 			self.bonds = atom.bonds
 		self.color = (0,1,0) #makes it green in blender
@@ -85,7 +85,7 @@ class Phosphorus(Atom):
 			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			self.bonds = []
+			self.bonds = ['e']
 		else:
 			self.bonds = atom.bonds
 		self.radius = 4
@@ -100,7 +100,7 @@ class Oxygen(Atom):
 			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			self.bonds = []
+			self.bonds = ['e', 'e']
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
@@ -115,7 +115,7 @@ class Sulfur(Atom):
 			atom = Atom(name)
 		self.name = atom.name
 		if atom.bonds == None:
-			self.bonds = []
+			self.bonds = ['e', 'e']
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
