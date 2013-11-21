@@ -59,7 +59,7 @@ def main():
     t = [1,2,3,[4,5],[],[6]]
     print flatten(t)
 
-    s1 = 'CH3CH2(NH2CH3OH)CH3SH'
+    s1 = 'CH3NH2SH'
     print 's1:',
     print parsing.remove_h(s1)
     print parsing.make_list(parsing.remove_h(s1))
