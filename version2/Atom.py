@@ -165,7 +165,6 @@ def main():
 	atom2 = Nitrogen('N2',['bond2'])
 	atom3 = Hydrogen('H3')
 
-
 	#list of atoms -- can it print properly?
 	#HINT: yes
 	t = [atom1, atom2, atom3]

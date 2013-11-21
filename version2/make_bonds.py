@@ -14,17 +14,17 @@ def set_bonds(t):
     for i in range(1,len(t)):
 
         #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
-        if type(t[i]) == Atom.Atom and type(t[i-1])==Atom.Atom:
+        if isinstance(t[i], Atom.Atom) and isinstance(t[i-1], Atom.Atom):
             res[i-1].bonds.append(t[i])
             res[i].bonds.append(t[i-1])
 
         #if current element is an Atom and the previous element represents a subchain, bond the current Atom to the Atom before the subchain.
-        elif type(t[i]) ==Atom.Atom and type(t[i-1]) == list:
+        elif isinstance(t[i], Atom.Atom) and type(t[i-1]) == list:
             res[i-2].bonds.append(t[i])
             res[i].bonds.append(t[i-2])
 
         #If current element is a subchain and the previous element is an Atom, bond the first Atom in the subchain to the previous Atom, then evaluate the subchain recursively. 
-        elif type(t[i]) == list and type(t[i-1]) == Atom.Atom:
+        elif type(t[i]) == list and isinstance(t[i-1], Atom.Atom):
             sub = t[i]
             print sub[0]
             res[i-1].bonds.append(sub[0])
