@@ -1,62 +1,108 @@
-import bpy
+
+#import bpy
 
 class Atom(object):
 	"""Represents an atom with bonds and electron pairs."""
-	def __init__(self, name = '', bonds = None, color = None, radius = 0):
+	def __init__(self, name = '', bonds = None):
 		"""Initializes instance of the Atom class. 
 
-		elem: string (element, ex. C, N, O)
 		name: string (name of atom, ex. C1, C2, N3)
 		bonds: list of Atom objects
 		"""
 		self.name = name
+		self.bonds = bonds
 
 	def __str__(self):
-		return '%s: %s, %s' % (self.elem, self.name, str(self.bonds))
+		return '%s: %s' % (self.name, str(self.bonds))
 
-#I have a feeling there is a way to combine these classes with the atom class above,
-# but I'm not sure how. Especially with the bonds area, there should be a way to
-# make this more elegant. Ideas?
+	def __repr__(self):
+		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
+
+		self: Atom
+		Returns: str
+		"""
+		return '%s: %s' % (self.name, str(self.bonds))
+
+
 
 class Hydrogen(Atom):
 	"""Creates an H atom class with properties used to graph"""
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.radius = 1
 		self.color = (1,0,0) #makes it red in blender
-	def __init__(self, Atom.bonds):
-		self.bonds = bonds
+
+
+	# def __str__(self):
+	# 	return '%s,%s' % (self.name, str(self.bonds))
+
 
 class Nitrogen(Atom):
 	"""Creates an N atom class with properties used to graph"""
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.color = (0,1,0) #makes it green in blender
 		self.radius = 3
-	def __init__(self,bonds = ['e']):
-		self.bonds = bonds
+
 
 class Carbon(Atom):
 	"""Creates a C atom class with properties used to graph"""
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.radius = 2
 		self.color = (1,1,1) #gray in blender
-	def __init__(self,bonds = []):
-		self.bonds = bonds
+
 
 class Phosphorus(Atom):
 	"""Creates a P atom class with properties used to graph"""
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.radius = 4
 		self.color = (2,0,2) #makes it purple
-	def __init__(self,bonds = ['e']):
-		self.bonds = bonds
+
 
 class Oxygen(Atom):
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.radius = 2
 		self.color = (1,1,1) #gray in blender
-	def __init__(self,bonds = ['e', 'e']):
-		self.bonds = bonds
+
 
 class Sulfur(Atom):
+	def __init__(self,name,bonds):
+		atom = Atom(name,bonds)
+		self.name = atom.name
+		if atom.bonds == None:
+			bonds = []
+		else:
+			self.bonds = atom.bonds
 		self.radius = 2
 		self.color = (1,1,1) #gray in blender
-	def __init__(self,bonds = ['e', 'e']):
-		self.bonds = bonds
 
 
  
@@ -87,13 +133,12 @@ class Sulfur(Atom):
 
 
 def main():
-	#If no bonds are given...
-	atom1 = Atom('N', 'N1')
-	print atom1
-
-	#If bonds are specified...
-	atom2 = Atom('N', 'N2', ['C1', 'C2'])
+	atom = Hydrogen('H1',['bond1'])
+	atom2 = Hydrogen('H2',['bond2'])
+	print atom
 	print atom2
+
+
 
 if __name__ == '__main__':
 	main()
