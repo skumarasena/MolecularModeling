@@ -45,17 +45,10 @@ class Hydrogen(Atom):
 		self.color = (1,0,0) #makes it red in blender
 
 
-	# def __str__(self):
-	# 	return '%s,%s' % (self.name, str(self.bonds))
-
-
 class Nitrogen(Atom):
 	"""Creates an N atom class with properties used to graph"""
 	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+		atom = Atom(name, bonds, pos)
 		self.name = atom.name
 		self.pos = atom.pos
 		if atom.bonds == None:
@@ -69,10 +62,7 @@ class Nitrogen(Atom):
 class Carbon(Atom):
 	"""Creates a C atom class with properties used to graph"""
 	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+		atom = Atom(name, bonds, pos)
 		self.name = atom.name
 		self.pos = atom.pos		
 		if atom.bonds == None:
@@ -86,10 +76,7 @@ class Carbon(Atom):
 class Phosphorus(Atom):
 	"""Creates a P atom class with properties used to graph"""
 	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+		atom = Atom(name, bonds, pos)
 		self.name = atom.name
 		self.pos = atom.pos		
 		if atom.bonds == None:
@@ -102,10 +89,7 @@ class Phosphorus(Atom):
 
 class Oxygen(Atom):
 	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+		atom = Atom(name, bonds, pos)
 		self.name = atom.name
 		self.pos = atom.pos		
 		if atom.bonds == None:
@@ -118,10 +102,7 @@ class Oxygen(Atom):
 
 class Sulfur(Atom):
 	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+		atom = Atom(name, bonds, pos)
 		self.name = atom.name
 		self.pos = atom.pos		
 		if atom.bonds == None:

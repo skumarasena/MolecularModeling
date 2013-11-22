@@ -16,13 +16,11 @@ def set_bonds(t):
 
         #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
         if isinstance(t[i], Atom.Atom) and isinstance(t[i-1], Atom.Atom):
-            print "elif1"
             res[i-1].bonds.append(t[i])
             res[i].bonds.append(t[i-1])
 
         #if current element is an Atom and the previous element represents a subchain, bond the current Atom to the Atom before the subchain.
         elif isinstance(t[i], Atom.Atom) and type(t[i-1]) == list:
-            print "elif2"
             res[i-2].bonds.append(t[i])
             res[i].bonds.append(t[i-2])
 
