@@ -31,7 +31,7 @@ def set_bonds(t):
             sub[0].bonds.append(t[i-1])
             set_bonds(sub)
 
-    return res
+    return flatten(res)
 
     # #test code: prints bonds of atoms.
     # for atom in t:
@@ -59,14 +59,19 @@ def main():
     t = [1,2,3,[4,5],[],[6]]
     print flatten(t)
 
+    #set_bonds() works for chains...
     s1 = 'CH3NH2SH'
     print 's1:',
-    print parsing.remove_h(s1)
-    print parsing.make_list(parsing.remove_h(s1))
-    t = parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
-
-    print t
-    print set_bonds(t)
+    t1 = parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
+    print t1
+    print set_bonds(t1)
+    
+    #...but not for nested chains. It only evaluates the first atom in the chain, then ignores the rest! We should fix this.
+    s2 = 'CH3NH(CHNHOH)SH'
+    print 's2:',
+    t2 = parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
+    print t2
+    print set_bonds(t2)
     
 
 
