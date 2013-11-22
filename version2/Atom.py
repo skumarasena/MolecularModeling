@@ -151,30 +151,30 @@ def main():
 	t = [atom1, atom2, atom3]
 
 	#testing...
-	print atom1
-	print atom2
-	print atom3
-	print t
+	print(atom1)
+	print(atom2)
+	print(atom3)
+	print(t)
 
 	#can we append bonds to atom objects that already have a bond list?
 	atom2.bonds.append('bond2.5')
-	print atom2
+	print(atom2)
 
 	#can we append bonds to atom objects that do not have a bond list yet?
 	atom3.bonds.append('bond3')
-	print atom3
+	print(atom3)
 
 	#can we append atoms to bond lists?
 	atom1.bonds.append(atom2)
-	print atom1
+	print(atom1)
 
 	#can positions be modified?
 	atom1.pos = [2,3,4]
-	print atom1
+	print(atom1)
 
 	#can position variables be created?
 	atom3.pos = [3,4,5]
-	print atom3
+	print(atom3)
 
 
 

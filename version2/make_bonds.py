@@ -91,21 +91,22 @@ def flatten(t):
 
 def main():
     t = [1,2,3,[4,5],[],[6]]
-    print flatten(t)
+    print(flatten(t))
 
     #set_bonds() works for chains...
     s1 = 'CH3NH2SH'
-    print 's1:',
     t1 = parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
-    print t1
-    print set_bonds(t1)
+    print('s1: ')
+    print(t1)
+    print(set_bonds(t1))
     
     #...but not for nested chains. It only evaluates the first atom in the chain, then ignores the rest! We should fix this.
     s2 = 'CH3NH(CHNHOH)SH'
-    print 's2:',
+
     t2 = parsing.number_list(parsing.make_list(parsing.remove_h(s1)))
-    print t2
-    print set_bonds(t2)
+    print('s2: ')
+    print(t2)
+    print(set_bonds(t2))
     
 
 

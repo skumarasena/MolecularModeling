@@ -89,45 +89,39 @@ def main():
 	#I attempted to test number_list()
 	i = 0
 	x = number_list(['C', 'C', 'C'])
-	print x[0]		#should print representation of an Atom object
+	print(x[0])		#should print representation of an Atom object
 
 	#weirdly enough, even when I try to reset i, this will still start at C3!
 	i = 0
-	print number_list(['C', 'N', 'O', ['C', 'P', ['C']], 'S', 'C'])
+	print(number_list(['C', 'N', 'O', ['C', 'P', ['C']], 'S', 'C']))
 
 
 	#the basics
 	s1 = 'CH3CH2CH3'
-	print 's1:',
-	print remove_h(s1)
+	print('s1: '+ remove_h(s1))
 
 	#test case for mixed upper/lowercase letters
 	s2 = 'Ch3Ch2cH3'
-	print 's2:',
-	print remove_h(s2)
+	print('s2: '+ remove_h(s2))
 
 	#different types of central atoms
 	s3 = 'CH3CH2NH2'
-	print 's3:',
-	print remove_h(s3)
+	print('s3: ' + remove_h(s3))
 
 	#ooh! nesting!
 	s4 = 'CH3CH2CH(CH3)CH2CH3'
-	print 's4:',
-	print remove_h(s4)
-	print make_list(remove_h(s4))
+	print('s4: ' + remove_h(s4))
+	print(make_list(remove_h(s4)))
 
 	#hard mode
 	s5 = 'CH3CH2CH(CH3CH(CH3)CH3)CH2CH3'
-	print 's5:',
-	print remove_h(s5)
-	print make_list(remove_h(s5))
+	print('s5: ' + remove_h(s5))
+	print(make_list(remove_h(s5)))
 
 	#EXTREEEEEME!
 	s6 = 'HOCH2(CH3CH2CH(CH2CH3)CH2CH3)CH(CH3)CH2NH2'
-	print 's6:',
-	print remove_h(s6)
-	print make_list(remove_h(s6))
+	print('s6: ' + remove_h(s6))
+	print(make_list(remove_h(s6)))
 
 
 if __name__ == '__main__':
