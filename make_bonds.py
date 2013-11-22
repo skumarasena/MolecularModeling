@@ -5,6 +5,8 @@ import parsing
 def set_bonds(t):
     """Takes a nested list of empty Atom objects, and gives each atom a list of Atom objects to which it is directly bonded.
 
+    TODO: Make this function work for nested lists! Currently, this function does not work for nested lists.
+
     t: nested list of Atom objects
     Returns: None
     """
