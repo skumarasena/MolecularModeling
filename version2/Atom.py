@@ -17,7 +17,7 @@ class Atom(object):
 			self.pos = pos
 
 	def __str__(self):
-		return '%s: %s' % (self.name, str(self.bonds))
+		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
 
 	def __repr__(self):
 		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
@@ -25,16 +25,16 @@ class Atom(object):
 		self: Atom
 		Returns: str
 		"""
-		return '%s: %s' % (self.name, str(self.bonds))
+		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
 
 
 class Hydrogen(Atom):
 	"""Creates an H atom class with properties used to graph"""
-	def __init__(self,name,bonds=None, pos=None):
-		try:
-			atom = Atom(name, bonds, pos)
-		except SyntaxError:
-			atom = Atom(name)
+	def __init__(self,name,bonds=None, pos = None):
+		#try:
+		atom = Atom(name, bonds, pos)
+		#except SyntaxError:
+		#	atom = Atom(name)
 		self.name = atom.name
 		self.pos = atom.pos
 		if atom.bonds == None:
@@ -161,9 +161,9 @@ class Sulfur(Atom):
 
 def main():
 	#initializing atoms with bonds, and without bonds
-	atom1 = Hydrogen('H1',['bond1'], [1,2,3])
+	atom1 = Hydrogen('H1',['bond1'])#, [1,2,3])
 	atom2 = Nitrogen('N2',['bond2'])
-	atom3 = Hydrogen('H3')
+	atom3 = Hydrogen('H3')#,pos=[1,2,3])
 
 	#list of atoms -- can it print properly?
 	#HINT: yes
