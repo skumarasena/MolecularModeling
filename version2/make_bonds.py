@@ -27,7 +27,7 @@ def set_bonds(t):
         #If current element is a subchain and the previous element is an Atom, bond the first Atom in the subchain to the previous Atom, then evaluate the subchain recursively. 
         elif type(t[i]) == list and isinstance(t[i-1], Atom.Atom):
             sub = t[i]
-            print sub[0]
+            #print sub[0]
             res[i-1].bonds.append(sub[0])
             sub[0].bonds.append(t[i-1])
             set_bonds(sub)
@@ -43,7 +43,7 @@ def set_bonds(t):
 #     Returns: None
 #     """
 #     res = copy.deepcopy(t)
-    
+#     res = copy.copy(t)       #alternatively, normal-copy works -- don't need deepcopy!
 #     for i in range(1,len(t)):
 
 #         #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.

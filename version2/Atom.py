@@ -17,7 +17,7 @@ class Atom(object):
 			self.pos = pos
 
 	def __str__(self):
-		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
+		return '%s: %s' % (self.name, str(self.bonds))#, str(self.pos))
 
 	def __repr__(self):
 		"""Creates a more formal representation of an Atom object, with its name, element, and bonds.
@@ -25,7 +25,7 @@ class Atom(object):
 		self: Atom
 		Returns: str
 		"""
-		return '%s: %s, %s' % (self.name, str(self.bonds), str(self.pos))
+		return '%s: %s' % (self.name, str(self.bonds))#, str(self.pos))
 
 
 class Hydrogen(Atom):
