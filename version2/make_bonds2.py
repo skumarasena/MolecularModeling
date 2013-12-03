@@ -3,12 +3,14 @@ import parsing
 import copy
 #from Atom import *
 
+i = 0
+
 def set_bonds(t):
     """Takes a nested list of empty Atom objects, and gives each atom a list of Atom objects to which it is directly bonded.
 
     TODO: make this function work for nested lists.
     t: nested list of Atom objects
-    Returns: None
+    Returns: nested list of filled Atom objects
     """
     res = copy.copy(t)#Not a typo. DO NOT change this to deepcopy!  
     
@@ -47,25 +49,61 @@ def flatten(t):
             res.append(elem)
     return res
 
+def fill_hydrogens(t):
+    """Takes a flattened list of Atom objects (from the function flatten()) and fills in all the missing hydrogen Atoms such that each Atom object has four bonds.
+
+    t: list of Atom objects
+    Returns: list of Atom objects.
+    """
+    global i
+    res = copy.copy(t)
+    c = 0
+
+    for j in range(len(t)):
+        atom = t[j]
+        num_h = 4 - len(atom.bonds)     #Since Atom objects cannot have more than 4 bonds, the only spaces that remain must belong to hydrogens.
+        # print num_h
+        if num_h > 0:
+            c += num_h
+            print c
+            for n in range(num_h):      #for every space that remains in atom.bonds, append a Hydrogen object to the bonds list.
+                print('Adding a Hydrogen')
+                hyd = Atom.Hydrogen('H' + str(i))
+                res.append(hyd)
+                final_atom = res[j]
+                final_atom.bonds.append(hyd)
+                i += 1
+    return res
+
 
 def main():
     #t = [1,2,3,[4,5],[],[6]]
     #print(flatten(t))
 
+    #Simple test case, without nesting
     s1 = 'CH3NH2SH'
     t1 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
 
-    s2 = 'CH3NH(CHNHOH)SH'
-
+    #Complicated example, with nesting and electron pairs
+    s2 = 'CH3N(CH2NHOH)SH'
     t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
 
-    for item in flatten(t2):
-        bonds = item.bonds
-        print item.name+":",
-        for thing in bonds:
-            if isinstance(thing,Atom.Atom):
-                print thing.name,
-        print ""
+    print fill_hydrogens(flatten(t2))
+
+    #Another simple example, this time with no electron pairs
+    s3 = 'CH3CH2CH3'
+    t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
+
+    # print fill_hydrogens(flatten(t3))
+
+    # for item in flatten(t2):
+    #     bonds = item.bonds
+    #     print item.name+":",
+    #     for thing in bonds:
+    #         if isinstance(thing,Atom.Atom):
+    #             print thing.name,
+    #     print ""
+
 
 if __name__ == '__main__':
     main()
