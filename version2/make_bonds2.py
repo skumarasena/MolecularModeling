@@ -3,7 +3,6 @@ import parsing
 import copy
 #from Atom import *
 
-i = 0
 
 def set_bonds(t):
     """Takes a nested list of empty Atom objects, and gives each atom a list of Atom objects to which it is directly bonded.
@@ -55,8 +54,10 @@ def fill_hydrogens(t):
     t: list of Atom objects
     Returns: list of Atom objects.
     """
-    global i
+    i = 0
     res = copy.copy(t)
+
+    #for debugging/testing purposes -- can delete later!
     c = 0
 
     for j in range(len(t)):
@@ -64,8 +65,12 @@ def fill_hydrogens(t):
         num_h = 4 - len(atom.bonds)     #Since Atom objects cannot have more than 4 bonds, the only spaces that remain must belong to hydrogens.
         # print num_h
         if num_h > 0:
+
+            #Again, these two lines are for debugging purposes only. Delete them if you do not want extra output.
             c += num_h
             print c
+
+
             for n in range(num_h):      #for every space that remains in atom.bonds, append a Hydrogen object to the bonds list.
                 print('Adding a Hydrogen')
                 hyd = Atom.Hydrogen('H' + str(i))
@@ -88,13 +93,18 @@ def main():
     s2 = 'CH3N(CH2NHOH)SH'
     t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
 
-    print fill_hydrogens(flatten(t2))
+    #print fill_hydrogens(flatten(t2))
 
     #Another simple example, this time with no electron pairs
     s3 = 'CH3CH2CH3'
     t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
 
-    # print fill_hydrogens(flatten(t3))
+    #An extremely simple test case...
+    s4 = 'CH4'
+    t4 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s4))))
+    print fill_hydrogens(flatten(t4))
+
+    #print fill_hydrogens(flatten(t3))
 
     # for item in flatten(t2):
     #     bonds = item.bonds
