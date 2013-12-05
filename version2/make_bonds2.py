@@ -57,7 +57,7 @@ def fill_hydrogens(t):
     i = 0
     res = copy.copy(t)
 
-    #for debugging/testing purposes -- can delete later!
+    #for debugging/testing purposes -- can delete later! This variable will keep count of the number of hydrogens added at a given point in time.
     c = 0
 
     for j in range(len(t)):
