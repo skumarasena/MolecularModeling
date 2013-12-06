@@ -42,7 +42,7 @@ class Hydrogen(Atom):
 		else:
 			self.bonds = atom.bonds
 		self.radius = 1
-		self.color = (1,0,0) #makes it red in blender
+		self.color = (1,1,1) #makes it white in blender
 
 
 class Nitrogen(Atom):
@@ -55,7 +55,7 @@ class Nitrogen(Atom):
 			self.bonds = ['e']
 		else:
 			self.bonds = atom.bonds
-		self.color = (0,1,0) #makes it green in blender
+		self.color = (135/255,206/255,235/255) #makes it sky blue in blender
 		self.radius = 3
 
 
@@ -70,7 +70,7 @@ class Carbon(Atom):
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
-		self.color = (1,1,1) #gray in blender
+		self.color = (0,0,0) #black in blender
 
 
 class Phosphorus(Atom):
@@ -84,7 +84,7 @@ class Phosphorus(Atom):
 		else:
 			self.bonds = atom.bonds
 		self.radius = 4
-		self.color = (2,0,2) #makes it purple
+		self.color = (139/255,0,139/255) #makes it purple
 
 
 class Oxygen(Atom):
@@ -97,7 +97,7 @@ class Oxygen(Atom):
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
-		self.color = (1,1,1) #gray in blender
+		self.color = (1,0,0) #red in blender
 
 
 class Sulfur(Atom):
@@ -110,7 +110,7 @@ class Sulfur(Atom):
 		else:
 			self.bonds = atom.bonds
 		self.radius = 2
-		self.color = (1,1,1) #gray in blender
+		self.color = (1,215/255,0) #gold in blender
 
 
  
