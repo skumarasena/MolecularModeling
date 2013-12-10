@@ -98,8 +98,8 @@ class Sulfur(Atom):
 def main():
 	#initializing atoms with bonds, and without bonds
 	atom1 = Hydrogen('H1',['bond1'], [1,2,3])
-	atom2 = Nitrogen('N2')
-	atom3 = Oxygen('O3',['bond3'],[1,2,3])
+	atom2 = Oxygen('O2',['bondddd'])
+	atom3 = Oxygen('O3')#,[1,2,3])
 
 	#list of atoms -- can it print properly?
 	#HINT: yes
@@ -112,25 +112,25 @@ def main():
 	# print(t)
 
 	#can we append bonds to atom objects that already have a bond list?
-	atom2.bonds.append('bond2.5')
-	print(atom2)
+	# atom2.bonds.append('bond2.5')
+	# print(atom2)
 
 	#can we append bonds to atom objects that do not have a bond list yet?
-	atom3.bonds.append('bond3')
-	print(atom3)
+	# atom3.bonds.append('bond3')
+	# print(atom3)
 
 	#can we append atoms to bond lists?
-	atom1.bonds.append(atom2)
-	print(atom1)
+	# atom1.bonds.append(atom2)
+	# print(atom1)
 
 	#can positions be modified?
-	atom1.pos = [2,3,4]
-	print(atom1)
+	# atom1.pos = [2,3,4]
+	# print(atom1)
 
 	#can position variables be created?
-	print atom3
-	atom3.pos = [3,4,5]
-	print(atom3)
+	# print atom3
+	# atom3.pos = [3,4,5]
+	# print(atom3)
 
 
 
