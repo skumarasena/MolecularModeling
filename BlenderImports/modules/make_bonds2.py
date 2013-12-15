@@ -1,0 +1,112 @@
+import Atom
+import parsing
+import copy
+
+def set_bonds(t):
+    """Takes a nested list of empty Atom objects, and gives each atom a list of Atom objects to which it is directly bonded.
+
+    TODO: make this function work for nested lists.
+    t: nested list of Atom objects
+    Returns: nested list of filled Atom objects
+    """
+    res = copy.copy(t)#Not a typo. DO NOT change this to deepcopy!  
+    
+    for i in range(1,len(t)):
+
+        #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
+        if isinstance(t[i],Atom.Atom) and isinstance(t[i-1],Atom.Atom):
+            res[i-1].bonds.insert(1,t[i])
+            res[i].bonds.insert(0,t[i-1])
+
+        #if current element is an Atom and the previous element represents a subchain, bond the current Atom to the Atom before the subchain.
+        elif isinstance(t[i],Atom.Atom) and isinstance(t[i-1],list):
+            res[i-2].bonds.append(1,t[i])
+            res[i].bonds.insert(0,t[i-2])
+
+        #If current element is a subchain and the previous element is an Atom, bond the first Atom in the subchain to the previous Atom, then evaluate the subchain recursively. 
+        elif isinstance(t[i],list) and isinstance(t[i-1],Atom.Atom):
+            sub = t[i]
+            res[i-1].bonds.insert(1,sub[0])
+            sub[0].bonds.insert(0,t[i-1])
+            set_bonds(sub)
+	
+    return (res)
+
+def flatten(t):
+    """Takes a nested list of Atom objects (from the function set_bonds()) and flattens it, so that the collapsed list can be passed to our drawing functions.
+
+    t: nested list of Atom objects
+    Returns: flattened list of Atoms
+    """
+    res = []
+    for elem in t:
+        if isinstance(elem, list):
+            res.extend(flatten(elem))
+        else:
+            res.append(elem)
+    return res
+
+def fill_hydrogens(t):
+    """Takes a flattened list of Atom objects (from the function flatten()) and fills in all the missing hydrogen Atoms such that each Atom object has four bonds.
+
+    t: list of Atom objects
+    Returns: list of Atom objects.
+    """
+    i = 0
+    res = copy.copy(t)
+
+    #for debugging/testing purposes -- can delete later! This variable will keep count of the number of hydrogens added at a given point in time.
+    c = 0
+
+    for j in range(len(t)):
+        atom = t[j]
+        num_h = 4 - len(atom.bonds)     #Since Atom objects cannot have more than 4 bonds, the only spaces that remain must belong to hydrogens.
+        # print num_h
+        if num_h > 0:
+
+
+            for n in range(num_h):      #for every space that remains in atom.bonds, append a Hydrogen object to the bonds list.
+                hyd = Atom.Hydrogen('H' + str(i))
+                res.append(hyd)
+                final_atom = res[j]
+                final_atom.bonds.append(hyd)
+                i += 1
+    return res
+
+
+def main():
+    #t = [1,2,3,[4,5],[],[6]]
+    #print(flatten(t))
+
+    #Simple test case, without nesting
+    s1 = 'CH3NH2SH'
+    t1 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
+
+    #Complicated example, with nesting and electron pairs
+    s2 = 'CH3N(CH2NHOH)SH'
+    t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
+
+    #print fill_hydrogens(flatten(t2))
+
+    #Another simple example, this time with no electron pairs
+    s3 = 'CH3CH2CH3'
+    t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
+
+    #An extremely simple test case...
+    s4 = 'CH4'
+    t4 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s4))))
+    #print fill_hydrogens(flatten(t4))
+
+    #print fill_hydrogens(flatten(t3))
+
+    # for item in flatten(t2):
+    #     bonds = item.bonds
+    #     print item.name+":",
+    #     for thing in bonds:
+    #         if isinstance(thing,Atom.Atom):
+    #             print thing.name,
+    #     print ""
+
+
+if __name__ == '__main__':
+    main()
