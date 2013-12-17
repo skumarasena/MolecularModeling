@@ -51,7 +51,7 @@ class Nitrogen(Atom):
 		
 		self.bonds.append('e')
 		self.color = (135/255,206/255,235/255) #makes it sky blue in blender
-		self.radius = 3
+		self.radius = 2.25
 
 
 class Carbon(Atom):
@@ -71,7 +71,7 @@ class Phosphorus(Atom):
 		super(Phosphorus,self).__init__(name,bonds,pos)
 		
 		self.bonds.append('e')
-		self.radius = 4
+		self.radius = 2.5
 		self.color = (139/255,0,139/255) #makes it purple
 
 
