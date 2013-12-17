@@ -39,55 +39,6 @@ def make_list(formula):
 	#Splits the string into elements by spaces, replaces parentheses with brackets, then evaluates the resulting expression as a Python expression. The result is a list. 
 	return eval(str(t2.split()).replace("'(',", '[').replace("')'",']'))
 
-# def make_list(formula):
-# 	"""Takes stripped formula (i.e. a structural formula which has gone through remove_h()) and converts it to a nested list.
-
-# 	TODO: handle formulas with parenthetical multiplicity, ex. C(CH3)3
-
-# 	formula: string
-# 	Returns: list
-# 	"""
-# 	#replaces parentheses with brackets
-# 	s = formula.replace('(', '[').replace(')', ']')
-	
-# 	#puts spaces between each character of the string
-# 	t = list(s)
-# 	t2 = ''.join([c + ' ' for c in t])
-# 	print t2
-
-# 	print ast.literal_eval(str(t2.split()))
-
-
-
-
-
-
-# def number_list(t):
-# 	"""Takes a nested list that represents a chemical formula (returned by the function make_list()), makes an analogous list of atoms, and numbers the atoms in order.
-
-# 	t: list of str
-# 	Returns: list of Atoms
-# 	"""	
-# 	global i
-# 	res = []
-# 	for elem in t:
-# 		if type(elem)==str:
-# 			#res.append(elem + str(i))		#appends string
-# 			if elem == 'C':
-# 				res.append(Atom.Carbon(elem + str(i)))	#appends atom
-# 			if elem == 'N':
-# 				res.append(Atom.Nitrogen(elem + str(i)))	#appends atom
-# 			if elem == 'O':
-# 				res.append(Atom.Oxygen(elem + str(i)))	#appends atom
-# 			if elem == 'P':
-# 				res.append(Atom.Phosphorus(elem + str(i)))	#appends atom	
-# 			if elem == 'S':
-# 				res.append(Atom.Sulfur(elem + str(i)))	#appends atom	
-# 			i +=1
-# 		if type(elem)==list:
-# 			res.append(number_list(elem))
-# 	return res
-
 class Parser(object):
 	"""Traverses a chemical formula, creates analogous atoms, and assigns them names."""
 	def __init__(self):

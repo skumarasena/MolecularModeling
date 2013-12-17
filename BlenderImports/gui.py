@@ -6,6 +6,8 @@ bl_info = {
 import bpy
 from bpy.props import *
 import Atom
+import parsing
+import make_bonds2
    
 class DefineMolecule(bpy.types.Panel):
     bl_idname = "define_molecule"        # unique identifier for buttons and menu items to reference.
@@ -29,6 +31,9 @@ class MakeMolecule(bpy.types.Operator):
     def execute(self,context):
         scn = context.scene
         molecule = scn.my_molecule
+        parsed_molecule = parsing.number_list(parsing.make_list(parsing.remove_h(molecule)))
+        molecule_with_set_bonds = make_bonds2.set_bonds(parsed_molecule)
+        flattened_bonds = make_bonds2.flatten(molecule_with_set_bonds)
         return{'FINISHED'} 
 
 def register():
