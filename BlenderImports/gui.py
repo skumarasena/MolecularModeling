@@ -6,11 +6,6 @@ bl_info = {
 import bpy
 from bpy.props import *
 import Atom
-import get_locations
-import make_bonds
-import make_bonds2
-import parsing
-import to_cartesian
    
 class DefineMolecule(bpy.types.Panel):
     bl_idname = "define_molecule"        # unique identifier for buttons and menu items to reference.
@@ -21,32 +16,31 @@ class DefineMolecule(bpy.types.Panel):
     def draw(self, context):        
         layout = self.layout
         scn = context.scene
-        layout.prop(scn,"MyString")
-        layout.operator("input.moleculestring", text = "Make Molecule")
+        layout.label(text = "Input Molecule")
+        layout.prop(scn, "my_molecule")
+        layout.operator("make.moleculestring", text = "Make Molecule")
+        
 
 class MakeMolecule(bpy.types.Operator):
-    bl_idname = "input.moleculestring"
+    bl_idname = "make.moleculestring"
     bl_label = "Create Molecule"
     bl_options = {'REGISTER', 'UNDO'}
-
-    # molecule = bpy.props.StringProperty(name="Input Molecule", default = "",  options={'ANIMATABLE'})
     
     def execute(self,context):
         scn = context.scene
-        s1 = get_data("MyString",scn)
+        molecule = scn.my_molecule
         return{'FINISHED'} 
-
-def get_data(key, scn):
-    val = scn[key]
 
 def register():
     bpy.utils.register_class(DefineMolecule)
     bpy.utils.register_class(MakeMolecule)
+    bpy.types.Scene.my_molecule = bpy.props.StringProperty(name = "",description = "User inputs a chemical formula",default = "CH3CH3")
 
 def unregister():
     bpy.utils.unregister_class(DefineMolecule)
     bpy.utils.unregister_class(MakeMolecule)
-
+    del bpy.types.Scene.my_molecule
+    
 
 if __name__ == "__main__":
     register()
