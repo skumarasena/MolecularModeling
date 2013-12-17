@@ -9,30 +9,31 @@ t: nested list of Atom objects
 Returns: nested list of filled Atom objects
 """
     res = copy.copy(t)#Not a typo. DO NOT change this to deepcopy!
-    
+
     for i in range(1,len(t)):
+        if len (i.bonds) >0:
 
-        #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
-        if isinstance(t[i],Atom.Atom) and isinstance(t[i-1],Atom.Atom):
-            res[i-1].bonds.insert(1,t[i])
-            res[i].bonds.insert(0,t[i-1])
+            #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
+            if isinstance(t[i],Atom.Atom) and isinstance(t[i-1],Atom.Atom):
+                res[i-1].bonds.insert(1,t[i])
+                res[i].bonds.insert(0,t[i-1])
 
-        #if current element is an Atom and the previous element represents a subchain, bond the current Atom to the Atom before the subchain.
-        elif isinstance(t[i],Atom.Atom) and isinstance(t[i-1],list):
-            res[i-2].bonds.append(t[i])
-            res[i].bonds.insert(0,t[i-2])
+            #if current element is an Atom and the previous element represents a subchain, bond the current Atom to the Atom before the subchain.
+            elif isinstance(t[i],Atom.Atom) and isinstance(t[i-1],list):
+                res[i-2].bonds.append(t[i])
+                res[i].bonds.insert(0,t[i-2])
 
-        #If current element is a subchain and the previous element is an Atom, bond the first Atom in the subchain to the previous Atom, then evaluate the subchain recursively.
-        elif isinstance(t[i],list) and isinstance(t[i-1],Atom.Atom):
-            sub = t[i]
-            res[i-1].bonds.insert(1,sub[0])
-            sub[0].bonds.insert(0,t[i-1])
-            set_bonds(sub)
+            #If current element is a subchain and the previous element is an Atom, bond the first Atom in the subchain to the previous Atom, then evaluate the subchain recursively.
+            elif isinstance(t[i],list) and isinstance(t[i-1],Atom.Atom):
+                sub = t[i]
+                res[i-1].bonds.insert(1,sub[0])
+                sub[0].bonds.insert(0,t[i-1])
+                set_bonds(sub)
 
-    if not isinstance(t[0].bonds[0],Atom.Atom):
-        t[0].bonds.pop(0)
-        t[0].bonds.append('e')
-        
+            if not isinstance(t[0].bonds[0],Atom.Atom):
+                t[0].bonds.pop(0)
+                t[0].bonds.append('e')
+            
     return (res)
 
 def flatten(t):
