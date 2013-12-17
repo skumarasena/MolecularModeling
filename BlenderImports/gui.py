@@ -6,14 +6,11 @@ bl_info = {
 import bpy
 from bpy.props import *
 import Atom
-
-# def init_scene_properties(scn):
-#     bpy.types.Scene.MyString = StringProperty(
-#         name = "Input a Molecule")
-#     scn['MyString'] = "Lorem ipsum dolor sit amet"
-#     return
-
-# init_scene_properties(bpy.context.scene)
+import get_locations
+import make_bonds
+import make_bonds2
+import parsing
+import to_cartesian
    
 class DefineMolecule(bpy.types.Panel):
     bl_idname = "define_molecule"        # unique identifier for buttons and menu items to reference.
@@ -36,38 +33,19 @@ class MakeMolecule(bpy.types.Operator):
     
     def execute(self,context):
         scn = context.scene
+        s1 = get_data("MyString",scn)
         return{'FINISHED'} 
 
-# def menu_func(self, context):
-#     self.layout.operator(MakeMolecule.bl_idname)
-
-# # store keymaps here to access after registration
-# addon_keymaps = []
+def get_data(key, scn):
+    val = scn[key]
 
 def register():
     bpy.utils.register_class(DefineMolecule)
     bpy.utils.register_class(MakeMolecule)
 
-    # bpy.types.VIEW3D_MT_object.append(menu_func)
-
-    # # handle the keymap
-    # wm = bpy.context.window_manager
-    # km = wm.keyconfigs.addon.keymaps.new(name='Object Mode', space_type='EMPTY')
-    # kmi = km.keymap_items.new(MakeMolecule.bl_idname, 'SPACE', 'PRESS', ctrl=True, shift=True)
-    # kmi.properties.molecule = 'Input molecule here'
-    # addon_keymaps.append(km)
-
 def unregister():
     bpy.utils.unregister_class(DefineMolecule)
     bpy.utils.unregister_class(MakeMolecule)
-    # bpy.types.VIEW3D_MT_object.remove(menu_func)
-
-    # # handle the keymap
-    # wm = bpy.context.window_manager
-    # for km in addon_keymaps:
-    #     wm.keyconfigs.addon.keymaps.remove(km)
-    # # clear the list
-    # del addon_keymaps[:]
 
 
 if __name__ == "__main__":
