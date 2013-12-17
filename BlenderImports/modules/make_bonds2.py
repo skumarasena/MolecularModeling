@@ -11,7 +11,7 @@ Returns: nested list of filled Atom objects
     res = copy.copy(t)#Not a typo. DO NOT change this to deepcopy!
 
     for i in range(1,len(t)):
-        if len (i.bonds) >0:
+        if len (t[i].bonds) >0:
 
             #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
             if isinstance(t[i],Atom.Atom) and isinstance(t[i-1],Atom.Atom):
