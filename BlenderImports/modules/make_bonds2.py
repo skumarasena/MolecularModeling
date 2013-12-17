@@ -30,9 +30,11 @@ Returns: nested list of filled Atom objects
                 sub[0].bonds.insert(0,t[i-1])
                 set_bonds(sub)
 
-            if not isinstance(t[0].bonds[0],Atom.Atom):
-                t[0].bonds.pop(0)
-                t[0].bonds.append('e')
+        if (len(t) >0):
+            if (len(t[0].bonds) > 0):
+                if not isinstance(t[0].bonds[0],Atom.Atom):
+                    t[0].bonds.pop(0)
+                    t[0].bonds.append('e')
             
     return (res)
 
