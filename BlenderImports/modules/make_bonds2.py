@@ -11,7 +11,7 @@ Returns: nested list of filled Atom objects
     res = copy.copy(t)#Not a typo. DO NOT change this to deepcopy!
 
     for i in range(1,len(t)):
-        if len (t[i].bonds) >0:
+        if isinstance (t[i], Atom.Atom):
 
             #if current element and previous element of the list are both part of the same chain, bond both atoms to each other.
             if isinstance(t[i],Atom.Atom) and isinstance(t[i-1],Atom.Atom):
@@ -31,11 +31,10 @@ Returns: nested list of filled Atom objects
                 set_bonds(sub)
 
         if (len(t) >0):
-            if (len(t[0].bonds) > 0):
+            if isinstance (t[i], Atom.Atom) and len(t[0].bonds) > 0:
                 if not isinstance(t[0].bonds[0],Atom.Atom):
                     t[0].bonds.pop(0)
                     t[0].bonds.append('e')
-            
     return (res)
 
 def flatten(t):
@@ -85,22 +84,23 @@ def main():
     #print(flatten(t))
 
     #Simple test case, without nesting
-    s1 = 'CH3NH2SH'
-    t1 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
+    #s1 = 'CH3NH2SH'
+    #t1 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
 
     #Complicated example, with nesting and electron pairs
-    s2 = 'CH3N(CH2NHOH)SH'
-    t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
+    #s2 = 'CH3N(CH2NHOH)SH'
+    #t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
 
     #print fill_hydrogens(flatten(t2))
 
     #Another simple example, this time with no electron pairs
-    s3 = 'CH3CH2CH3'
-    t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
+    #s3 = 'CH3CH2CH3'
+    #t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
 
     #An extremely simple test case...
-    s4 = 'CH4'
+    s4 = 'PCCH4'
     t4 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s4))))
+    print(t4)
     #print fill_hydrogens(flatten(t4))
 
     #print fill_hydrogens(flatten(t3))
