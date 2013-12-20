@@ -52,17 +52,41 @@ Returns: flattened list of Atoms
             res.append(elem)
     return res
 
-def fill_hydrogens(t):
-    """Takes a flattened list of Atom objects (from the function flatten()) and fills in all the missing hydrogen Atoms such that each Atom object has four bonds.
+# def fill_hydrogens(t):
+#     """Takes a flattened list of Atom objects (from the function flatten()) and fills in all the missing hydrogen Atoms such that each Atom object has four bonds.
 
-t: list of Atom objects
-Returns: list of Atom objects.
-"""
-    i = 0
+# t: list of Atom objects
+# Returns: list of Atom objects.
+# """
+#     i = 0
+#     res = copy.copy(t)
+
+#     #for debugging/testing purposes -- can delete later! This variable will keep count of the number of hydrogens added at a given point in time.
+#     c = 0
+
+#     for j in range(len(t)):
+#         atom = t[j]
+#         if isinstance(atom,Atom.Atom):
+#             num_h = 4 - len(atom.bonds) #Since Atom objects cannot have more than 4 bonds, the only spaces that remain must belong to hydrogens.
+#             # print num_h
+#             if num_h > 0:
+
+#                 for n in range(num_h): #for every space that remains in atom.bonds, append a Hydrogen object to the bonds list.
+#                     hyd = Atom.Hydrogen('H' + str(i))
+#                     res.append(hyd)
+#                     final_atom = res[j]
+#                     final_atom.bonds.append(hyd)
+#                     i += 1
+#         else:
+#             fill_hydrogens(t[j])
+#     return res
+
+def fill(t, p):
+    """Takes a flattened list of Atom objects and adds hydrogen atoms to them where appropriate.
+
+    t: list of Atom objects
+    p: Parser object"""
     res = copy.copy(t)
-
-    #for debugging/testing purposes -- can delete later! This variable will keep count of the number of hydrogens added at a given point in time.
-    c = 0
 
     for j in range(len(t)):
         atom = t[j]
@@ -72,13 +96,23 @@ Returns: list of Atom objects.
             if num_h > 0:
 
                 for n in range(num_h): #for every space that remains in atom.bonds, append a Hydrogen object to the bonds list.
-                    hyd = Atom.Hydrogen('H' + str(i))
+                    hyd = Atom.Hydrogen('H' + str(p.i))
                     res.append(hyd)
                     final_atom = res[j]
                     final_atom.bonds.append(hyd)
-                    i += 1
+                    p.i += 1
         else:
-            fill_hydrogens(t[j])
+            fill_hydrogens(t[j], p)
+    return res
+
+def fill_hydrogens(t):
+    """Takes a flattened list of Atom objects (from the function flatten()) and fills in all the missing hydrogen Atoms such that each Atom object has four bonds.
+
+    t: list of Atom objects
+    Returns: list of Atom objects.
+    """
+    p = parsing.Parser()
+    res = fill(t,p)
     return res
 
 
@@ -90,20 +124,20 @@ def main():
     #s1 = 'CH3NH2SH'
     #t1 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s1))))
 
-    #Complicated example, with nesting and electron pairs
-    #s2 = 'CH3N(CH2NHOH)SH'
-    #t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
+    # Complicated example, with nesting and electron pairs
+    s2 = 'CH3N(CH2NHOH)SH'
+    t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
 
-    #print fill_hydrogens(flatten(t2))
+    print fill_hydrogens(flatten(t2))
 
     #Another simple example, this time with no electron pairs
     #s3 = 'CH3CH2CH3'
     #t3 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s3))))
 
     #An extremely simple test case...
-    s4 = 'PCCH4'
-    t4 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s4))))
-    print(t4)
+    # s4 = 'PCCH4'
+    # t4 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s4))))
+    # print(t4)
     #print fill_hydrogens(flatten(t4))
 
     #print fill_hydrogens(flatten(t3))
