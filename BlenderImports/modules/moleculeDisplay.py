@@ -124,7 +124,6 @@ def makeMolecule(formula):
         t[1].pos = ((0,b*sqrt(t[0].radius)*sqrt(t[1].radius),0))
     set_pos(t,b)
     t2 = flatten(t)
-    print(t2)
   
     bpy.ops.scene.delete()
     bpy.ops.scene.new(type = 'NEW')
@@ -146,7 +145,11 @@ def makeMolecule(formula):
         #Draws cylinders between atoms
         for i in range(0, len(bonds)):
             if isinstance(bonds[i], Atom):
+                hyd = (bonds[i].name[0:1])
                 list = [atom, bonds[i]]
+                bpy.ops.mesh.primitive_uv_sphere_add(location = bonds[i].pos, size = bonds[i].radius*1)
+                colors[hyd] = colors.get(hyd, makeMaterial(hyd,tuple(bonds[i].color), (1,1,1),1))
+                setMaterial(bpy.context.object, colors[hyd])
                 
                 # Create curve 
                 draw_curve = bpy.data.curves.new('draw_curve','CURVE')
