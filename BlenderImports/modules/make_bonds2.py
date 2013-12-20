@@ -102,7 +102,7 @@ def fill(t, p):
                     final_atom.bonds.append(hyd)
                     p.i += 1
         else:
-            fill_hydrogens(t[j], p)
+            fill(t[j], p)
     return res
 
 def fill_hydrogens(t):
@@ -128,7 +128,7 @@ def main():
     s2 = 'CH3N(CH2NHOH)SH'
     t2 = set_bonds(parsing.number_list(parsing.make_list(parsing.remove_h(s2))))
 
-    print fill_hydrogens(flatten(t2))
+    print(fill_hydrogens(flatten(t2)))
 
     #Another simple example, this time with no electron pairs
     #s3 = 'CH3CH2CH3'
