@@ -50,40 +50,28 @@ def set_bonded(atom,rotate,b):
             y = atom.pos[1] - item.pos[1]
             z = atom.pos[2] - item.pos[2]
             break
-
-    #Angles between various atoms
-    n = math.radians(109.5)
-    n2 = 2*pi/3
-    
-    #Angle between existing bond and y-axis
-    y_angle = math.atan2(x,z)+pi
    
+    n = math.radians(109.5)
+    n2 = pi*2/3
+
     #Represents tetrahedron base centered at (0,0,0)
     v1 = Vector((b*sin(n),0,b*cos(n)))
     v2 = Vector((b*cos(n2),b*sin(n2),b*cos(n)))
     v3 = Vector((b*cos(2*n2),b*sin(2*n2),b*cos(n)))
     
-    cy= cos(y_angle)
-    sy = sin(y_angle)
-    
-    #Rotates tetrahedron around y-axis to match initial bond position
-    my = Matrix(((cy,0,-sy),(0,1,0),(sy,0,cy)))
- 
-    #Rotates every other atom around z
-    if (rotate):
-        a1 = pi-math.atan2(x,y)
-        c1 = cos(a1)
-        s1 = sin(a1)
-        m_base = Matrix(((c1,s1,0),(-s1,c1,0),(0,0,1)))
-    else:
-        m_base = Matrix()
-    
     offset = (Vector((atom.pos)))
+
+    top= Vector((0,0,-b))
+    diff = Vector((x,y,z))
+
+    axis = top.cross(diff)
+    a = -(top.angle(diff, 0))
     
+    m = Matrix.Rotation(a,3,axis)
     #Rotates the tetrahedron base to align itself with the starting vector
-    v1 = v1*my*m_base
-    v2 = v2*my*m_base
-    v3 = v3*my*m_base
+    v1 = v1*m
+    v2 = v2*m
+    v3 = v3*m
     
     #Sets the positions of bonded atoms to locations in the tetrahedron, scales bond lengths and moves tetrahedron
     if isinstance(bonds[1], Atom):
@@ -135,7 +123,7 @@ def makeMolecule(formula):
     b = 3
 
     #Sets position of first atom for use in rotation
-    t[0].pos = (0,0,b*sqrt(t[0].radius)*sqrt(t[1].radius))
+    t[0].pos = (0,b*sqrt(t[0].radius)*sqrt(t[1].radius),0)
     set_pos(t,b)
     t2 = flatten(t)
   
